@@ -5,13 +5,13 @@
 
 apt-get update
 
-echo -e "\e[1;46m ++++++++++ INSTALLING FILE DAEMON ++++++++++ \e[0m"
-apt-get install bacula-fd -y
+echo -e "\e[1;46m ++++++++++ Installing File Daemon ++++++++++ \e[0m"
+apt-get install -y bacula-fd 
 
-echo -e "\e[1;46m ++++++++++ INSTALLING IPROUTE2 ++++++++++ \e[0m"
+echo -e "\e[1;46m ++++++++++ Installing Iproute2 ++++++++++ \e[0m"
 apt-get install -y iproute2
 
-echo -e "\e[1;46m ++++++++++ STARTING FILE DAEMON ++++++++++ \e[0m"
+echo -e "\e[1;46m ++++++++++ Starting File Daemon ++++++++++ \e[0m"
 service bacula-fd start
 
 

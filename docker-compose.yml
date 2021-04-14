@@ -1,45 +1,45 @@
-#README:
-#You need to use
-#docker network create --subnet=172.18.0.0/16 bacula_network
-#before being able to use this docker compose
+#   README:
+#   You need to use
+#   docker network create --subnet=172.18.0.0/16 bacula_network
+#   before being able to use this docker compose
 
-#Still need to look into the 
-#build: ./directory_to_build
-#thing 
+#   Still Need to look into the 
+#   build: ./directory_to_build
+#   thing 
 
 version: '2'
 
-#MIGHT NOT REQUIRE PORT FORWARING WITH THE HOST
+
 services:
     bacula-dir:
         image: mydirector:latest
-        tty: true
+        #tty: true
         container_name: bacula-dir
         hostname: bacula-dir
-        ports:
-            - "9101:9101"
+        #ports:
+        #    - "9101:9101"
         networks:
             bacula_network:
                 ipv4_address: 172.18.0.11
 
     bacula-fd:
         image: myfiledaemon:latest
-        tty: true
+        #tty: true
         container_name: bacula-fd
         hostname: bacula-fd
-        ports:
-            - "9102:9102"
+        # ports:
+        #     - "9102:9102"
         networks:
             bacula_network:
                 ipv4_address: 172.18.0.12
 
     bacula-sd:
         image: mystoragedaemon:latest
-        tty: true
+        #tty: true
         container_name: bacula-sd
         hostname: bacula-sd
-        ports:
-            - "9103:9103"
+        # ports:
+        #     - "9103:9103"
         networks:
             bacula_network:
                 ipv4_address: 172.18.0.13

@@ -4,17 +4,24 @@ EXPOSE 9101
 ENTRYPOINT pg_ctlcluster 12 main start && service bacula-director start && /bin/bash
 
 ARG DEBIAN_FRONTEND=noninteractive
+ENV DIRPASS=director
+ENV CONPASS=bconsole
+ENV FDPASS=filed
+ENV SDPASS=storaged
+ENV DIRADDR=172.18.0.11
+ENV FDADDR=172.18.0.12
+ENV SDADDR=172.18.0.13
 
 # install requisites
-COPY script_before.sh .
-RUN chmod 700 script_before.sh
-RUN ./script_before.sh
+COPY script_init.sh .
+RUN chmod 700 script_init.sh
+RUN ./script_init.sh
 
 # copy the bacula director config file 
-COPY ../configs/bacula-dir.conf /etc/bacula/bacula-dir.conf
-COPY ../configs/bconsole.conf /etc/bacula/bconsole.conf
+COPY bacula-dir.conf /etc/bacula/bacula-dir.conf
+COPY bconsole.conf /etc/bacula/bconsole.conf
 
 # now change passwords
-COPY script_pass.sh .
-RUN chmod 700 script_pass.sh
-RUN ./script_pass.sh
+COPY script_conf.sh .
+RUN chmod 700 script_conf.sh
+RUN ./script_conf.sh

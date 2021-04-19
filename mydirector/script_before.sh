@@ -11,6 +11,9 @@ debconf-set-selections <<< 'bacula-director-pgsql bacula-director-pgsql/dbconfig
 #debconf-set-selections <<< 'bacula-director-pgsql bacula-director-pgsql/pgsql/app-pass password hello'
 #debconf-set-selections <<< 'bacula-director-pgsql bacula-director-pgsql/password-confirm password hello'
 
+echo -e "\e[1;46m ++++++++++ Installing Nano ++++++++++ \e[0m"
+apt-get install -y nano
+
 echo -e "\e[1;46m ++++++++++ Installing Postgre ++++++++++ \e[0m"
 apt-get install -y postgresql
 
@@ -28,4 +31,3 @@ apt-get install -y iproute2
 
 echo -e "\e[1;46m ++++++++++ Starting Director ++++++++++ \e[0m"
 service bacula-director start
-

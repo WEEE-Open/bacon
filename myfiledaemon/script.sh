@@ -5,6 +5,9 @@
 
 apt-get update
 
+echo -e "\e[1;46m ++++++++++ Installing Nano ++++++++++ \e[0m"
+apt-get install -y nano
+
 echo -e "\e[1;46m ++++++++++ Installing File Daemon ++++++++++ \e[0m"
 apt-get install -y bacula-fd 
 

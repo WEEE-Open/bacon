@@ -31,3 +31,6 @@ apt-get install -y iproute2
 
 echo -e "\e[1;46m ++++++++++ Starting Director ++++++++++ \e[0m"
 service bacula-director start
+
+echo -e "\e[1;46m ++++++++++ Saving old db password ++++++++++ \e[0m"
+cat /etc/bacula/bacula-dir.conf | grep -o 'dbpassword.*' > dbpass.txt

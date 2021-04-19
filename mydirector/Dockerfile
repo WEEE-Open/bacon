@@ -4,10 +4,12 @@ EXPOSE 9101
 ENTRYPOINT pg_ctlcluster 12 main start && service bacula-director start && /bin/bash
 
 ARG DEBIAN_FRONTEND=noninteractive
+
 ENV DIRPASS=director
 ENV CONPASS=bconsole
 ENV FDPASS=filed
 ENV SDPASS=storaged
+
 ENV DIRADDR=172.18.0.11
 ENV FDADDR=172.18.0.12
 ENV SDADDR=172.18.0.13

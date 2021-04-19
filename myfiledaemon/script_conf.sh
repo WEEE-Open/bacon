@@ -2,4 +2,7 @@
 # this script is changes the defaults of the filedaemon
 
 echo -e "\e[1;46m ++++++++++ Replacing passwords in Bacula Director config ++++++++++ \e[0m"
-sed -i 's/{{FDPASS}}/$FDPASS/g' /etc/bacula/bacula-fd.conf
+sed -i "s/{{FDPASS}}/$FDPASS/g" /etc/bacula/bacula-fd.conf
+
+echo -e "\e[1;46m ++++++++++ Replacing addr in Bacula Director config ++++++++++ \e[0m"
+sed -i "s/{{FDADDR}}/$FDADDR/g" /etc/bacula/bacula-fd.conf

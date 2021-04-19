@@ -4,7 +4,9 @@ EXPOSE 9103
 ENTRYPOINT service bacula-sd start && /bin/bash
 
 ARG DEBIAN_FRONTEND=noninteractive
+
 ENV SDPASS=storaged
+
 ENV SDADDR=172.18.0.13
 
 # install requisites

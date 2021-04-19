@@ -4,7 +4,9 @@ EXPOSE 9102
 ENTRYPOINT service bacula-fd start && /bin/bash
 
 ARG DEBIAN_FRONTEND=noninteractive
+
 ENV FDPASS=filed
+
 ENV FDADDR=172.18.0.12
 
 # install requisites

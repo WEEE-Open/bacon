@@ -12,7 +12,7 @@ sed -i "/dbname/c \ \ dbname = \"bacula\"; DB Address = \"localhost\"; dbuser = 
 #rm -f dbpass.txt
 
 echo -e "\e[1;46m ++++++++++ Replacing pass in Bacula Console config ++++++++++ \e[0m"
-sed -i "s/{{CONPASS}}/$CONPASS/g" /etc/bacula/bconsole.conf
+sed -i "s/{{DIRPASS}}/$DIRPASS/g" /etc/bacula/bconsole.conf
 
 echo -e "\e[1;46m ++++++++++ Replacing addr in Bacula Director config ++++++++++ \e[0m"
 sed -i "s/{{DIRADDR}}/$DIRADDR/g" /etc/bacula/bacula-dir.conf

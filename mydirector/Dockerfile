@@ -6,7 +6,7 @@ ENTRYPOINT pg_ctlcluster 12 main start && service bacula-director start && /bin/
 ARG DEBIAN_FRONTEND=noninteractive
 
 ENV DIRPASS=director
-ENV CONPASS=bconsole
+#ENV CONPASS=bconsole # in the end I used the dirpass also in the console 
 ENV FDPASS=filed
 ENV SDPASS=storaged
 
@@ -14,8 +14,8 @@ ENV DIRADDR=172.18.0.11
 ENV FDADDR=172.18.0.12
 ENV SDADDR=172.18.0.13
 
-ENV RESTOREPATH=/home/backup/
-ENV ORIGIN=/home/
+ENV FDRESTOREDIR=/home/backup/
+ENV FDBACKUPDIR=/home/
 #to change the path of the sd go to the sd config
 
 # install requisites

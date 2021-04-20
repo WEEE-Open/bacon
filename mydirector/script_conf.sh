@@ -23,3 +23,6 @@ sed -i "s/{{SDADDR}}/$SDADDR/g" /etc/bacula/bacula-dir.conf
 echo -e "\e[1;46m ++++++++++ Replacing addr in Bacula Console config ++++++++++ \e[0m"
 sed -i "s/{{DIRADDR}}/$DIRADDR/g" /etc/bacula/bconsole.conf
 
+echo -e "\e[1;46m ++++++++++ Replacing paths in Bacula Director config ++++++++++ \e[0m"
+sed -i "s/{{RESTOREPATH1}}/$RESTOREPATH1/g" /etc/bacula/bacula-dir.conf
+sed -i "s/{{ORIGIN}}/$ORIGIN/g" /etc/bacula/bacula-dir.conf

@@ -14,6 +14,10 @@ ENV DIRADDR=172.18.0.11
 ENV FDADDR=172.18.0.12
 ENV SDADDR=172.18.0.13
 
+ENV RESTOREPATH=/home/backup/
+ENV ORIGIN=/home/
+#to change the path of the sd go to the sd config
+
 # install requisites
 COPY script_init.sh .
 RUN chmod 700 script_init.sh

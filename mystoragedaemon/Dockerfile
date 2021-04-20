@@ -9,6 +9,8 @@ ENV SDPASS=storaged
 
 ENV SDADDR=172.18.0.13
 
+ENV DESTINATION=/root/
+
 # install requisites
 COPY script_init.sh .
 RUN chmod 700 script_init.sh

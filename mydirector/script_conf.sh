@@ -30,5 +30,3 @@ sed -i "s/{{DIRADDR}}/$DIRADDR/g" /etc/bacula/bconsole.conf
 echo -e "\e[1;46m ++++++++++ Replacing directories of the fd in Bacula Director config ++++++++++ \e[0m"
 sed -i "s@{{FDRESTOREDIR}}@$FDRESTOREDIR@g" /etc/bacula/bacula-dir.conf
 sed -i "s@{{FDBACKUPDIR}}@$FDBACKUPDIR@g" /etc/bacula/bacula-dir.conf
-
-service bacula-director start

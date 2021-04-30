@@ -1,0 +1,48 @@
+#   README:
+#   You need to use
+#   docker network create --subnet=172.18.0.0/16 bacula_network
+#   before being able to use this docker compose
+
+#   Still Need to look into the 
+#   build: ./directory_to_build
+#   thing 
+
+version: '2'
+
+
+services:
+    bacula-dir:
+        image: mydirector:latest
+        tty: true
+        #stdin_open: true
+        container_name: bacula-dir
+        hostname: bacula-dir
+        #env_file: .env
+        environment:
+            DIRPASS: ${DIRPASS}
+            FDPASS: ${FDPASS}
+            SDPASS: ${SDPASS}
+            DIRADDR: ${DIRADDR}
+            FDADDR: ${FDADDR}
+            SDADDR: ${SDADDR}
+            FDRESTOREDIR: ${FDRESTOREDIR}
+            FDBACKUPDIR: ${FDBACKUPDIR}
+        
+        volumes: 
+            #check if you need :ro
+
+            #configs
+            - ./volumes/configs/:/etc/bacula/
+    
+        
+        #entrypoint: ./script_conf.sh
+        #ports:
+        #    - "9101:9101"
+        networks:
+            bacula_network:
+                ipv4_address: 172.18.0.11
+
+#NETWORK DEFINITION
+networks:
+  bacula_network:
+    external: true

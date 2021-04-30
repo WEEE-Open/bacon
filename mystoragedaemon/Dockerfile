@@ -1,7 +1,7 @@
 FROM ubuntu:latest 
 
 EXPOSE 9103
-#ENTRYPOINT service bacula-sd start && /bin/bash
+ENTRYPOINT ./script_conf.sh && service bacula-sd start && /bin/bash
 
 ARG DEBIAN_FRONTEND=noninteractive
 

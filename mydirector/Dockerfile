@@ -1,8 +1,7 @@
 FROM ubuntu:latest 
 
 EXPOSE 9101
-#ENTRYPOINT pg_ctlcluster 12 main start && service bacula-director start && /bin/bash
-#ENTRYPOINT /bin/bash
+ENTRYPOINT ./script_conf.sh && pg_ctlcluster 12 main start && service bacula-director start && /bin/bash
 
 ARG DEBIAN_FRONTEND=noninteractive
 

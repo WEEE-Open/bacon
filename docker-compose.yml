@@ -45,12 +45,12 @@ services:
 
   bacula-fd:
     build:
-      context: ./myfiledaemon
+      context: ./docker/myfiledaemon
       dockerfile: ./Dockerfile
     image: bacula/filedaemon
-    tty: true
     container_name: bacula-fd
     hostname: bacula-fd
+    tty: true
     #env_file: .env
     environment:
       FDPASS: ${FDPASS}
@@ -67,11 +67,11 @@ services:
 
   bacula-sd:
     build:
-      context: ./mystoragedaemon
+      context: ./docker/mystoragedaemon
       dockerfile: ./Dockerfile
     image: bacula/storagedaemon
-    tty: true
     container_name: bacula-sd
+    tty: true
     hostname: bacula-sd
     #env_file: .env
     environment:

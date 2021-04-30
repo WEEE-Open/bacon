@@ -11,84 +11,76 @@ version: '2'
 
 
 services:
-    bacula-dir:
-        build:
-            context: ./mydirector
-            dockerfile: ./Dockerfile
-            image: bacula/director
-        tty: true
-        container_name: bacula-dir
-        hostname: bacula-dir
-        #env_file: .env
-        environment:
-            DIRPASS: ${DIRPASS}
-            FDPASS: ${FDPASS}
-            SDPASS: ${SDPASS}
-            DIRADDR: ${DIRADDR}
-            FDADDR: ${FDADDR}
-            SDADDR: ${SDADDR}
-            FDRESTOREDIR: ${FDRESTOREDIR}
-            FDBACKUPDIR: ${FDBACKUPDIR}
-        
-        #ports:
-        #    - "9101:9101"
-        networks:
-            bacula_network:
-                ipv4_address: 172.18.0.11
+  database:
+    image: postgres:latest
+    container_name: bacula-db
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_DB: ${DATABASE_NAME}
 
-    bacula-fd:
-        build:
-            context: ./myfiledaemon
-            dockerfile: ./Dockerfile
-            image: bacula/filedaemon
-        tty: true
-        container_name: bacula-fd
-        hostname: bacula-fd
-        #env_file: .env
-        environment:
-            FDPASS: ${FDPASS}
-            FDADDR: ${FDADDR}
-            FDRESTOREDIR: ${FDRESTOREDIR}
-            FDBACKUPDIR: ${FDBACKUPDIR}
-        volumes: 
-            #check if you need :ro
-           
-            #directories
-            - ./volumes/backup/:/home/backup/
-            - ./volumes/restore/:/home/restore/
-        
-        # ports:
-        #     - "9102:9102"
-        networks:
-            bacula_network:
-                ipv4_address: 172.18.0.12
+  director:
+    build:
+      context: ./docker/mydirector
+      dockerfile: ./Dockerfile
+    image: bacula/director
+    container_name: bacula-dir
+    hostname: bacula-dir
+    #tty: true
+    #stdin_open: true
+    #env_file: .env
+    environment:
+      DIRPASS: ${DIRPASS}
+      FDPASS: ${FDPASS}
+      SDPASS: ${SDPASS}
+      DIRADDR: ${DIRADDR}
+      FDADDR: ${FDADDR}
+      SDADDR: ${SDADDR}
+      DBADDR: ${DBADDR}
+      FDRESTOREDIR: ${FDRESTOREDIR}
+      FDBACKUPDIR: ${FDBACKUPDIR}  
+    expose:
+      - 9101
 
-    bacula-sd:
-        build:
-            context: ./mystoragedaemon
-            dockerfile: ./Dockerfile
-            image: bacula/storagedaemon
-        tty: true
-        container_name: bacula-sd
-        hostname: bacula-sd
-        #env_file: .env
-        environment:
-            SDPASS: ${SDPASS}
-            SDADDR: ${SDADDR}
-            SDDIR: ${SDDIR}
-        volumes: 
-            #check if you need :ro
-       
-            #directories
-            - ./volumes/storage/:/home/
-            
-        # ports:
-        #     - "9103:9103"
-        networks:
-            bacula_network:
-                ipv4_address: 172.18.0.13
+  bacula-fd:
+    build:
+      context: ./myfiledaemon
+      dockerfile: ./Dockerfile
+      image: bacula/filedaemon
+    tty: true
+    container_name: bacula-fd
+    hostname: bacula-fd
+    #env_file: .env
+    environment:
+      FDPASS: ${FDPASS}
+      FDADDR: ${FDADDR}
+      FDRESTOREDIR: ${FDRESTOREDIR}
+      FDBACKUPDIR: ${FDBACKUPDIR}
+    volumes: 
+      #check if you need :ro
+      #directories
+      - ./volumes/backup/:/home/backup/
+      - ./volumes/restore/:/home/restore/
+    expose:
+      - 9102
 
-#NETWORK DEFINITION
-networks:
-  bacula_network:
-    external: true
+  bacula-sd:
+    build:
+      context: ./mystoragedaemon
+      dockerfile: ./Dockerfile
+      image: bacula/storagedaemon
+    tty: true
+    container_name: bacula-sd
+    hostname: bacula-sd
+    #env_file: .env
+    environment:
+      SDPASS: ${SDPASS}
+      SDADDR: ${SDADDR}
+      SDDIR: ${SDDIR}
+    volumes: 
+      #check if you need :ro
+      #directories
+      - ./volumes/storage/:/home/
+    expose:
+      - 9103

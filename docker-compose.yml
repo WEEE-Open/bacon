@@ -14,35 +14,33 @@ services:
     bacula-dir:
         image: mydirector:latest
         tty: true
+        #stdin_open: true
         container_name: bacula-dir
         hostname: bacula-dir
+        #env_file: .env
+        environment:
+            DIRPASS: ${DIRPASS}
+            FDPASS: ${FDPASS}
+            SDPASS: ${SDPASS}
+            DIRADDR: ${DIRADDR}
+            FDADDR: ${FDADDR}
+            SDADDR: ${SDADDR}
+            FDRESTOREDIR: ${FDRESTOREDIR}
+            FDBACKUPDIR: ${FDBACKUPDIR}
+        
+        # volumes: 
+        #     #check if you need :ro
+
+        #     #configs
+        #     - ./volumes/configs/bacula-dir.conf:/etc/bacula/bacula-dir.conf
+        #     - ./volumes/configs/bconsole.conf:/etc/bacula/bconsole.conf
+        
+        entrypoint: ./script_conf.sh
         #ports:
         #    - "9101:9101"
         networks:
             bacula_network:
                 ipv4_address: 172.18.0.11
-
-    bacula-fd:
-        image: myfiledaemon:latest
-        tty: true
-        container_name: bacula-fd
-        hostname: bacula-fd
-        # ports:
-        #     - "9102:9102"
-        networks:
-            bacula_network:
-                ipv4_address: 172.18.0.12
-
-    bacula-sd:
-        image: mystoragedaemon:latest
-        tty: true
-        container_name: bacula-sd
-        hostname: bacula-sd
-        # ports:
-        #     - "9103:9103"
-        networks:
-            bacula_network:
-                ipv4_address: 172.18.0.13
 
 #NETWORK DEFINITION
 networks:

@@ -14,7 +14,8 @@ apt-get install -y bacula-fd
 echo -e "\e[1;46m ++++++++++ Installing Iproute2 ++++++++++ \e[0m"
 apt-get install -y iproute2
 
-echo -e "\e[1;46m ++++++++++ Starting File Daemon ++++++++++ \e[0m"
-service bacula-fd start
+echo -e "\e[1;46m ++++++++++ Making /home/backup/ ++++++++++ \e[0m"
+mkdir /home/backup/
 
-
+echo -e "\e[1;46m ++++++++++ Making /home/restore/ ++++++++++ \e[0m"
+mkdir /home/restore/

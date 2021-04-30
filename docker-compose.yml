@@ -9,40 +9,34 @@
 
 version: '2'
 
-
 services:
-    bacula-dir:
-        image: mydirector:latest
-        tty: true
-        #stdin_open: true
-        container_name: bacula-dir
-        hostname: bacula-dir
-        #env_file: .env
-        environment:
-            DIRPASS: ${DIRPASS}
-            FDPASS: ${FDPASS}
-            SDPASS: ${SDPASS}
-            DIRADDR: ${DIRADDR}
-            FDADDR: ${FDADDR}
-            SDADDR: ${SDADDR}
-            FDRESTOREDIR: ${FDRESTOREDIR}
-            FDBACKUPDIR: ${FDBACKUPDIR}
-        
-        # volumes: 
-        #     #check if you need :ro
+  bacula-dir:
+    build:
+      context: ./mydirector
+      dockerfile: ./Dockerfile
+    image: bacula/director
+    container_name: bacula-dir
+    hostname: bacula-dir
+    #tty: true
+    #stdin_open: true
+    #env_file: .env
+    environment:
+      DIRPASS: ${DIRPASS}
+      FDPASS: ${FDPASS}
+      SDPASS: ${SDPASS}
+      DIRADDR: ${DIRADDR}
+      FDADDR: ${FDADDR}
+      SDADDR: ${SDADDR}
+      FDRESTOREDIR: ${FDRESTOREDIR}
+      FDBACKUPDIR: ${FDBACKUPDIR}
+    
+    # volumes: 
+    #     #check if you need :ro
 
-        #     #configs
-        #     - ./volumes/configs/bacula-dir.conf:/etc/bacula/bacula-dir.conf
-        #     - ./volumes/configs/bconsole.conf:/etc/bacula/bconsole.conf
-        
-        entrypoint: ./script_conf.sh
-        #ports:
-        #    - "9101:9101"
-        networks:
-            bacula_network:
-                ipv4_address: 172.18.0.11
-
-#NETWORK DEFINITION
-networks:
-  bacula_network:
-    external: true
+    #     #configs
+    #     - ./volumes/configs/bacula-dir.conf:/etc/bacula/bacula-dir.conf
+    #     - ./volumes/configs/bconsole.conf:/etc/bacula/bconsole.conf
+    
+    entrypoint: ./script_conf.sh
+    expose:
+      - 9101

@@ -1,8 +1,10 @@
 .PHONY:
 destroy:
-	docker-compose down --volume || true
-	docker container rm bacula-dir
-	docker container rm bacula-db
+	docker-compose down --volume 	|| true
+	docker container rm bacula-dir	|| true
+	docker container rm bacula-db	|| true
+	docker container rm bacula-sd	|| true
+	docker container rm bacula-fd	|| true
 
 .PHONY:
 build: destroy $(wildcard docker/**/*)

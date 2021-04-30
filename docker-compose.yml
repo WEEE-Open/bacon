@@ -15,7 +15,7 @@ services:
         build:
             context: ./mydirector
             dockerfile: ./Dockerfile
-            image: bacula/director
+        image: bacula/director
         tty: true
         container_name: bacula-dir
         hostname: bacula-dir
@@ -40,7 +40,7 @@ services:
         build:
             context: ./myfiledaemon
             dockerfile: ./Dockerfile
-            image: bacula/filedaemon
+        image: bacula/filedaemon
         tty: true
         container_name: bacula-fd
         hostname: bacula-fd
@@ -67,7 +67,7 @@ services:
         build:
             context: ./mystoragedaemon
             dockerfile: ./Dockerfile
-            image: bacula/storagedaemon
+        image: bacula/storagedaemon
         tty: true
         container_name: bacula-sd
         hostname: bacula-sd

@@ -11,7 +11,6 @@ version: '2'
 
 
 services:
-<<<<<<< HEAD
   database:
     image: postgres:latest
     container_name: bacula-db
@@ -65,84 +64,6 @@ services:
       - ./volumes/restore/:/home/restore/
     expose:
       - 9102
-=======
-    bacula-dir:
-        build:
-            context: ./mydirector
-            dockerfile: ./Dockerfile
-        image: bacula/director
-        tty: true
-        container_name: bacula-dir
-        hostname: bacula-dir
-        #env_file: .env
-        environment:
-            DIRPASS: ${DIRPASS}
-            FDPASS: ${FDPASS}
-            SDPASS: ${SDPASS}
-            DIRADDR: ${DIRADDR}
-            FDADDR: ${FDADDR}
-            SDADDR: ${SDADDR}
-            FDRESTOREDIR: ${FDRESTOREDIR}
-            FDBACKUPDIR: ${FDBACKUPDIR}
-        
-        #ports:
-        #    - "9101:9101"
-        networks:
-            bacula_network:
-                ipv4_address: 172.18.0.11
-
-    bacula-fd:
-        build:
-            context: ./myfiledaemon
-            dockerfile: ./Dockerfile
-        image: bacula/filedaemon
-        tty: true
-        container_name: bacula-fd
-        hostname: bacula-fd
-        #env_file: .env
-        environment:
-            FDPASS: ${FDPASS}
-            FDADDR: ${FDADDR}
-            FDRESTOREDIR: ${FDRESTOREDIR}
-            FDBACKUPDIR: ${FDBACKUPDIR}
-        volumes: 
-            #check if you need :ro
-           
-            #directories
-            - ./volumes/backup/:/home/backup/
-            - ./volumes/restore/:/home/restore/
-        
-        # ports:
-        #     - "9102:9102"
-        networks:
-            bacula_network:
-                ipv4_address: 172.18.0.12
-
-    bacula-sd:
-        build:
-            context: ./mystoragedaemon
-            dockerfile: ./Dockerfile
-        image: bacula/storagedaemon
-        tty: true
-        container_name: bacula-sd
-        hostname: bacula-sd
-        #env_file: .env
-        environment:
-            SDPASS: ${SDPASS}
-            SDADDR: ${SDADDR}
-            SDDIR: ${SDDIR}
-        volumes: 
-            #check if you need :ro
-       
-            #directories
-            - ./volumes/storage/:/home/
-            
-        # ports:
-        #     - "9103:9103"
-        networks:
-            bacula_network:
-                ipv4_address: 172.18.0.13
->>>>>>> df164e46e328bec9d3df01deae0f8f77bbb0db35
 
   bacula-sd:
     build:

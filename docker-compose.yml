@@ -12,7 +12,10 @@ version: '2'
 
 services:
     bacula-dir:
-        image: mydirector:latest
+        build:
+            context: ./mydirector
+            dockerfile: ./Dockerfile
+            image: bacula/director
         tty: true
         container_name: bacula-dir
         hostname: bacula-dir
@@ -34,7 +37,10 @@ services:
                 ipv4_address: 172.18.0.11
 
     bacula-fd:
-        image: myfiledaemon:latest
+        build:
+            context: ./myfiledaemon
+            dockerfile: ./Dockerfile
+            image: bacula/filedaemon
         tty: true
         container_name: bacula-fd
         hostname: bacula-fd
@@ -58,7 +64,10 @@ services:
                 ipv4_address: 172.18.0.12
 
     bacula-sd:
-        image: mystoragedaemon:latest
+        build:
+            context: ./mystoragedaemon
+            dockerfile: ./Dockerfile
+            image: bacula/storagedaemon
         tty: true
         container_name: bacula-sd
         hostname: bacula-sd

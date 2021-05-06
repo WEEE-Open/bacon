@@ -14,6 +14,7 @@ services:
   database:
     image: postgres:latest
     container_name: bacula-db
+    hostname: bacula-db
     restart: always
     environment:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
@@ -27,7 +28,7 @@ services:
     image: bacula/director
     container_name: bacula-dir
     hostname: bacula-dir
-    #tty: true
+    tty: true
     #stdin_open: true
     #env_file: .env
     environment:

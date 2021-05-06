@@ -1,4 +1,0 @@
-use env variables for paths
-use volumes for paths
-use build time varibles
-use fixed postgresql version (12)

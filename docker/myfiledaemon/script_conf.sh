@@ -1,5 +1,6 @@
 #!/bin/bash
-# this script is changes the defaults of the filedaemon
+
+# this script changes the placeholder vales of the file daemon config
 
 echo -e "\e[1;46m ++++++++++ Duplicating template ++++++++++ \e[0m"
 cp /etc/bacula/bacula-fd.conf.template /etc/bacula/bacula-fd.conf

@@ -1,7 +1,8 @@
 #!/bin/bash
-# this script is changes the defaults of the director and bconsole
 
-DBPASS=$(cat dbpass.txt) #re default password
+# this script changes the placeholder vales of the director and console configs
+
+DBPASS=$(cat dbpass.txt) #read default password
 
 echo -e "\e[1;46m ++++++++++ Duplicating template ++++++++++ \e[0m"
 cp /etc/bacula/bacula-dir.conf.template /etc/bacula/bacula-dir.conf
@@ -12,6 +13,8 @@ sed -i "s/{{DIRPASS}}/$DIRPASS/g" /etc/bacula/bacula-dir.conf
 sed -i "s/{{CONPASS}}/$CONPASS/g" /etc/bacula/bacula-dir.conf
 sed -i "s/{{FDPASS}}/$FDPASS/g" /etc/bacula/bacula-dir.conf
 sed -i "s/{{SDPASS}}/$SDPASS/g" /etc/bacula/bacula-dir.conf
+
+# here I replace the placeholder bacula db password with the one the system automatically generated during the install 
 sed -i "/dbname/c \ \ dbname = \"bacula\"; DB Address = \"localhost\"; dbuser = \"bacula\"; $DBPASS" /etc/bacula/bacula-dir.conf 
 #rm -f dbpass.txt
 

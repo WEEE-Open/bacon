@@ -1,5 +1,6 @@
 #!/bin/bash
-# this script is changes the defaults of the storagedaemon
+
+# this script changes the placeholder vales of the storage daemon config
 
 echo -e "\e[1;46m ++++++++++ Duplicating template ++++++++++ \e[0m"
 cp /etc/bacula/bacula-sd.conf.template /etc/bacula/bacula-sd.conf

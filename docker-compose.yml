@@ -1,12 +1,3 @@
-#   README:
-#   You need to use
-#   docker network create --subnet=172.18.0.0/16 bacula_network
-#   before being able to use this docker compose
-
-#   Still Need to look into the 
-#   build: ./directory_to_build
-#   thing 
-
 version: '2'
 
 

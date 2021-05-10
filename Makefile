@@ -1,4 +1,8 @@
 .PHONY:
+template:
+	if [ ! -f ".env" ]; then cp sample.env .env; fi
+
+.PHONY:
 destroy:
 	docker-compose down --volume 	|| true
 	docker container rm bacula-dir	|| true
@@ -7,17 +11,16 @@ destroy:
 	docker container rm bacula-fd	|| true
 
 .PHONY:
-build: destroy $(wildcard docker/**/*)
+build: destroy template $(wildcard docker/**/*)
 	docker-compose build --no-cache
 
 .PHONY:
-up:
+up: template
 	docker-compose up -d
 
 .PHONY:
 down:
 	docker-compose down
 
-# Aliases
 .PHONY:
 rebuild: build up
